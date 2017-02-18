@@ -40,14 +40,31 @@ don't play out in practice.
 
 ## Operations in psuedocode
 
+The technique is applicable in all languages.  This library is written in C++
+but I will use psuedocode to explain how it works.
+
+* Number of nodes
+
+```
+nodecnt(t) = { len(t.p) }
+```
+
+* Keys of all nodes
+
+```
+range(x,y) = { # Q `count`; APL/C++ `iota`; return [x, x+1, x+2, ...y-1]
+	i=x; ret=[]; while(i++<y) ret=join(ret,i); return ret
+}
+keys(t) = { range(0, nodecnt(t)) }
+```
+
 * Add an item to the tree:
 
 ```
-join(x,y) = { flatten[x,y] }    # helper func.. push_back, [], etc.
-
-insert(t, val, parent) = {
+join(x,y) = { flatten(x,y) }    # helper func.. push_back, [], etc.
+insert(t, val, parentidx) = {
 	t.d = join(t.d,val)
-	t.p = join(t.p,parent)
+	t.p = join(t.p,parentidx)
 }
 ```
 
@@ -56,10 +73,12 @@ insert(t, val, parent) = {
 Remember, we use the index of a node (called `c`) as its identifier:
 
 ```
-parentof(t,c) = { t.p[c] }
+parentof(t,childidx) = { t.p[childidx] }
 ```
 
 * Retrieve value of node:
+
+We'll use `c` for `childidx`, a node key, from here on out.
 
 ```
 data(t,c) = { t.d[c] }
@@ -89,22 +108,19 @@ childnodes(t,c) = { where(t.p,c) }
 childdata(t,c) = { data(childnodes(c)) }
 ```
 
-* Determine leaf nodes (no children):
+* Determine leaf nodes (those with no children):
 
 First, build a vector of all the indices. Then remove those indices that are
 also in `p`. The psuedocode below is a slow implementation; should be done as a 
 single loop.
 
 ```
-range(x,y) = {
-	i=0; ret=[]; while(i++<y) ret=join(ret,i); return ret
-}
-except(x,y) = { 
+except(x,y) = { # return elements of x except those in y. set subtraction
 	ret=[]; 
 	for idx,xx in x: if(!xx in y, {ret=join(ret,xx)}); 
 	return ret;
 }
-leaves(t) = { except(range(0,len(t.p)), t.p) }
+leaves(t) = { except(keys(t), t.p) }
 ```
 
 * Determine vector of parents for a given node, or path to node:
@@ -163,11 +179,12 @@ Pointers are annoying anyway.
 
 ## Origins
 
-I've been lazily trying to figure out who invented this technique. It's so obvious I would imagine it must have had a name
-during the vector-oriented 60s and 70s.
+I've been lazily trying to figure out who invented this technique. It's so
+obvious I would imagine it must have had a name during the vector-oriented 60s
+and 70s.
 
 The first full explanation I saw was from Apter as explained above, but it was
-also implemented as early as K3. Here's a version in Q:
+also documented widely as early as K3. Here's a version in Q:
 
 ```
 / nested directory: use a parent vector, e.g.
@@ -182,12 +199,14 @@ c:group p     / children
 n p scan 3    / full path
 ```
 
-I must have read that a hundred times before I internalized its genius. 
-[See four other ways to represent trees in K](https://a.kx.com/q/tree.q) each in about three lines of code.
+I must have read that a hundred times before I internalized its genius.  [See
+four other ways to represent trees in K](https://a.kx.com/q/tree.q) each in
+about three lines of code.
 
-APL, or at least Dyalog, seems to implement trees in a more traditional way, using nested boxes: 
-[see here for more](https://dfns.dyalog.com/n_BST.htm). They do however use a [similar technique for
-vector graphs](https://dfns.dyalog.com/n_Graphs.htm).
+APL, or at least Dyalog, seems to implement trees in a more traditional way,
+using nested boxes: [see here for more](https://dfns.dyalog.com/n_BST.htm).
+They do however use a [similar technique for vector
+graphs](https://dfns.dyalog.com/n_Graphs.htm).
 
 It appears to be known to J users as seen in [Rosetta Code's tree
 implementation in

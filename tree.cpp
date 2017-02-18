@@ -103,10 +103,11 @@ int main(void) {
 	int r=emit(t.insert(0,"root"));
 	int d=emit(t.insert(r,"dogs"));
 	int c=emit(t.insert(r,"cats"));
-	int a=emit(t.insert(r,"warlords"));
+	int a=emit(t.insert(r,"snakes"));
 	int da=emit(t.insert(d,"min pin"));
-	int db=emit(t.insert(d,"schnauz"));
-	int dba=emit(t.insert(db,"white schnauz"));
+	int db=emit(t.insert(d,"schnauzer"));
+	int dba=emit(t.insert(db,"giant schnauzer"));
+	int aa=emit(t.insert(a,"anaconda"));
 	emit(t, "tree");
 	emit(t.leaves(), "leaves");
 	emit(t.path(5), "path(5)");

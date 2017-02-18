@@ -88,7 +88,7 @@ insert(t, val, parentidx) = {
 
 * Determine parent of a given node:
 
-Remember, we use the index of a node (called `c`) as its identifier:
+Remember, we use the numeric index of a node (`childidx`) as its identifier:
 
 ```
 parentof(t,childidx) = { t.p[childidx] }
@@ -96,7 +96,7 @@ parentof(t,childidx) = { t.p[childidx] }
 
 * Retrieve value of node:
 
-We'll use `c` for `childidx`, a node key, from here on out.
+We'll use `c` instead of `childidx`, from here on out.
 
 ```
 data(t,c) = { t.d[c] }
@@ -188,11 +188,29 @@ This can vary depending on your application. A sentinel value like `MAXINT` in
 the parent column is probably easiest. Some systems uses `-1` to represent an
 empty node if you can spare the sign bit.
 
-## Again, who cares?
+## Again, who cares? (Unfounded editorializing)
 
-I think this is the most elegant implementation of trees I've seen. Given the
-right vector operations library it's also by far the shortest, which means you
-can easily understand it, fix it. Given common sense it's also the fastest.
+I think this is the most elegant implementation style of trees I've seen. 
+
+Given the right vector operations library, it's by far the shortest, which
+means you can easily understand it, find bugs in it. 
+
+Given the simplicity, it's easy to adapt for other usage scenarios. For
+instance, you could maintain a third index of keys to create low overhead
+sorted order for data. 
+
+You can ignore the parent index vector and iterate
+quickly through the values if you are searching for something, which is like a
+deep map, for free. You can remap all parent-child relatioships in one go. You
+can build a serialized version instantly or transmit it over a network without
+iteration. It's GPU friendly. It's easy to use in an embedded context. It's
+secure because you can easily impose boundaries (by not allowing the vectors
+to grow beyond a certain size).
+
+Given common sense it's also the fastest. There's very little memory overhead,
+and in many cases, access will be linear. Intermediate values and recursion is
+minimized. Computers are great at handling ints cuz that's what the benchmarks
+do.
 
 Pointers are annoying anyway.
 

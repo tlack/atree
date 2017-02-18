@@ -52,6 +52,10 @@ don't play out in practice.
 The technique is applicable in all languages.  This library is written in C++
 but I will use psuedocode to explain how it works.
 
+* Empty tree
+
+tree() = { {d:[], p:[]} }       # some sort of [data,parentidxs] vector
+
 * Number of nodes
 
 ```
@@ -61,6 +65,7 @@ nodecnt(t) = { len(t.p) }
 * Keys of all nodes
 
 ```
+join(x,y) = { flatten(x,y) }    # helper func.. push_back, [], etc.
 range(x,y) = { # Q `count`; APL/C++ `iota`; return [x, x+1, x+2, ...y-1]
 	i=x; ret=[]; while(i++<y) ret=join(ret,i); return ret
 }
@@ -70,7 +75,6 @@ keys(t) = { range(0, nodecnt(t)) }
 * Add an item to the tree:
 
 ```
-join(x,y) = { flatten(x,y) }    # helper func.. push_back, [], etc.
 insert(t, val, parentidx) = {
 	t.d = join(t.d,val)
 	t.p = join(t.p,parentidx)

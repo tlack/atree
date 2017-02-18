@@ -1,6 +1,9 @@
 # Apter Trees in C++
 
-A tree-like data type implemented in C++17, in the style of Stevan Apter in 
+Apter Trees are a representation of trees using just two vectors: `[nodevalues,
+parentindices]`.
+
+This repo contains a tree-like data type implemented in C++17, in the style of Stevan Apter in 
 [Treetable: a case-study in q](http://archive.vector.org.uk/art10500340).
 
 ## Who cares?

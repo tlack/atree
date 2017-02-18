@@ -5,20 +5,29 @@ A tree-like data type implemented in C++17, in the style of Stevan Apter in
 
 ## Who cares?
 
-In most software trees are implemented like a typical binary tree, where each
+A tree is a data structure in which values have parent-child relationships to
+each other. They come in many forms.
+
+In most software, trees are implemented like a typical binary tree, where each
 node contains its own data and a pointer to each of its children, which are
 also nodes. 
 
-Using such a data structure can be complex due to recursion and slow due to cache behavior
-in modern systems and the frequent malloc()s.
+Using such a data structure can be complex due to recursion and slow due to
+cache behavior in modern systems and the frequent malloc()s. The concept of who
+"owns" a tree node in such a system can become quite complex in multi-layered
+software.
 
 Apter Trees are much faster, easier to reason about, and easier to implement.
 
 ## How it works
 
-An Apter tree is implemented as a vector (array) of data (we'll call it `d`)
-and a vector of parent indices (`p`). The index of an item in the `d` vector is
-used its key, which we will call `c` in the examples below. 
+An Apter tree is implemented as two same-sized arrays.
+
+One is a vector (array) of data (we'll call it `d`). These correspond to the
+things that each node contains.
+
+The other is a vector of parent indices (`p`). The index of an item in the `d`
+vector is used its key, which we will call `c` in the examples below. 
 
 Often, the key/index `c` will just be an int. 
 
@@ -31,7 +40,7 @@ and Arca had a son named Cricket, you might have a data structure like:
 ```
 
 A node with a key of `0` whose parent is zero is the root node. Apter trees
-require a root node, or the use of -1 to mean "no parent", which is slightly
+require a root node, or the use of `-1` to mean "no parent", which is slightly
 less elegant so I'll ignore it.
 
 Computers are very, very fast at manipulating vectors. They're so much faster
@@ -166,14 +175,15 @@ all(t) = { sort(each(leaves(t), (c){ parent(t, c) })) }
 
 * Delete item 
 
-This can vary depending on your application. A sentinel value like `MAX_INT` in
+This can vary depending on your application. A sentinel value like `MAXINT` in
 the parent column is probably easiest. Some systems uses `-1` to represent an
 empty node if you can spare the sign bit.
 
 ## Again, who cares?
 
-I think this is the most elegant implementation of trees I've seen. Given the right vector operations library,
-it's also by far the shortest. Given common sense it's also the fastest.
+I think this is the most elegant implementation of trees I've seen. Given the
+right vector operations library it's also by far the shortest, which means you
+can easily understand it, fix it. Given common sense it's also the fastest.
 
 Pointers are annoying anyway.
 

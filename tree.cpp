@@ -31,7 +31,7 @@ template <typename X>
 // index X with y, and then X again with the result, until it returns the same thing twice
 // returns all steps
 // i.e., [ x[y], x[x[y]], x[x[x[y]]], ...
-vector<X> recurse(const vector<X> x, X y) {
+vector<X> exhaust(const vector<X> x, X y) {
 	X i=y,last;
 	vector<X> r;
 	r.reserve(x.size());
@@ -70,7 +70,7 @@ class Tree {
 		return p[child];
 	}
 	vector<TreeIndex> path(const TreeIndex child) {
-		return recurse(p, child);
+		return exhaust(p, child);
 	}
 	vector<TreeIndex> leaves() {
 		return except(til(size()), p);
@@ -112,8 +112,8 @@ int main(void) {
 	emit(t.leaves(), "leaves");
 	emit(t.path(5), "path(5)");
 	emit(t[t.path(5)], "t[path(5)]");
-	auto x=recurse(t.p, 6);
-	emit(x, "recurse");
+	auto x=exhaust(t.p, 6);
+	emit(x, "exhaust");
 	test_iter();
 	emit("fin");
 }

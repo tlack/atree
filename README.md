@@ -27,7 +27,7 @@ One is a vector (array) of data (we'll call it `d`). These correspond to the
 things that each node contains.
 
 The other is a vector of parent indices (`p`). The index of an item in the `d`
-vector is used its key, which we will call `c` in the examples below. 
+vector is used as its key, which we will call `c` in the examples below. 
 
 Often, the key/index `c` will just be an int. 
 

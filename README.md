@@ -225,13 +225,19 @@ J](https://rosettacode.org/wiki/Tree_traversal#J:_Alternate_implementation)
 
 ## Other common tree implementations
 
-Here are some other well known trees. None of these do the same thing as an
-Apter tree, and they're far larger due to generalizations, but it's still
-interesting to consider how much code a tree requires to do simple operations.
+Here are some other well known trees. 
+
+None of these do the same thing as an Apter tree, and some are far larger due
+to generalizations, but it's still interesting to consider how much code
+different styles of trees requires to do simple operations.
 
 * [FreeBSD's kernel tree implementation](https://svnweb.freebsd.org/base/head/sys/sys/tree.h?revision=277642&view=markup)
 
 * [klib's tree](https://github.com/attractivechaos/klib/blob/master/kbtree.h)
+
+* [a tree class in Ruby](https://github.com/ealdent/simple-tree/blob/master/lib/simple_tree.rb)
+
+* [Python declarative tree class](https://github.com/ShuaiW/Python/blob/master/POC/Tree.py)
 
 ## Status of this code
 

@@ -57,7 +57,9 @@ but I will use psuedocode to explain how it works.
 
 * Empty tree
 
+```
 tree() = { {d:[], p:[]} }       # some sort of [data,parentidxs] vector
+```
 
 * Number of nodes
 

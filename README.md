@@ -248,3 +248,6 @@ different styles of trees requires to do simple operations.
 I've made a sorta lazy attempt at implementing this in C++ as a way to learn C++17. Not really ready
 for use or fully fleshed out. I still have a lot to learn about C++.
 
+## Thanks
+
+Arthur Whitney, Apter, others: inspiration. Dave Linn: proof reading.

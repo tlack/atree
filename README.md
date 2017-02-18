@@ -10,27 +10,29 @@ node contains its own data and a pointer to each of its children, which are
 also nodes. 
 
 Using such a data structure can be complex due to recursion and slow due to cache behavior
-in modern systems and the frequenct malloc()s.
+in modern systems and the frequent malloc()s.
+
+Apter Trees are much faster, easier to reason about, and easier to implement.
 
 ## How it works
 
 An Apter tree is implemented as a vector (array) of data (we'll call it `d`)
 and a vector of parent indices (`p`). The index of an item in the `d` vector is
-its key, which we will call `c`. 
+used its key, which we will call `c` in the examples below. 
 
-Often, the key/index `c` will just be an int.
+Often, the key/index `c` will just be an int. 
 
-So, if we had a family tree in which Coco was the father of Molly and Arca, and
-Arca had a song named Cricket, you might have a data structure like:
+So, if we had a dog family tree in which Coco was the father of Molly and Arca,
+and Arca had a son named Cricket, you might have a data structure like:
 
 ```
 	tree.d = ["Coco", "Molly", "Arca","Cricket"]
 	tree.p = [0,0,0,2]
 ```
 
-A node whose parent is zero is the root node. Apter trees require a root node,
-or the use of -1 to mean "no parent", which is slightly less elegant so I'll
-ignore it.
+A node with a key of `0` whose parent is zero is the root node. Apter trees
+require a root node, or the use of -1 to mean "no parent", which is slightly
+less elegant so I'll ignore it.
 
 Computers are very, very fast at manipulating vectors. They're so much faster
 than pointer operations that comparisons of big-O notation for an algorithm
@@ -43,8 +45,8 @@ don't play out in practice.
 ```
 join(x,y) = { flatten[x,y] }    # helper func.. push_back, [], etc.
 
-insert(t, data, parent) = {
-	t.d = join(t.d,data)
+insert(t, val, parent) = {
+	t.d = join(t.d,val)
 	t.p = join(t.p,parent)
 }
 ```
@@ -63,14 +65,20 @@ parentof(t,c) = { t.p[c] }
 data(t,c) = { t.d[c] }
 ```
 
-* Determine children of a node:
+* Scan for keys that have a given value:
 
 ```
-where(vec,val) = { # helper: find indices of vec that contain val
+where(vec,val) = { # helper: return indices of vec that contain val
 	matches=[]
 	for idx,v in vec: if(v==val, {matches=join(matches,idx)})
 	return matches
 }
+search(t,val) = { where(t.d,val) }
+```
+
+* Determine children of a node:
+
+```
 childnodes(t,c) = { where(t.p,c) }
 ```
 

@@ -12,12 +12,12 @@ A tree is a data structure in which values have parent-child relationships to
 each other. They come in many forms.
 
 In most software, trees are implemented like a typical binary tree, where each
-node contains its own data and a pointer to each of its children, which are
-also nodes. 
+node contains its own data and a pointer to each of its children, nominally just
+left and right, which are also nodes. The cycle continues.
 
-Using such a data structure can be complex due to recursion and slow due to
-cache behavior in modern systems and the frequent malloc()s. The concept of who
-"owns" a tree node in such a system can become quite complex in multi-layered
+Using such a data structure can be challenging due to recursion and slow due to
+cache behavior in modern systems and frequent malloc()s. The concept of who
+"owns" a tree node in such a system can become complex in multi-layered
 software.
 
 Apter Trees are much faster, easier to reason about, and easier to implement.
@@ -27,7 +27,7 @@ Apter Trees are much faster, easier to reason about, and easier to implement.
 An Apter tree is implemented as two same-sized arrays.
 
 One is a vector (array) of data (we'll call it `d`). These correspond to the
-things that each node contains.
+values, or things that each node contains.
 
 The other is a vector of parent indices (`p`). The index of an item in the `d`
 vector is used as its key, which we will call `c` in the examples below. 
@@ -143,8 +143,9 @@ leaves(t) = { except(keys(t), t.p) }
 
 * Determine vector of parents for a given node, or path to node:
 
-Here we keep going up the tree until we can't go any further (ends at 0). We call this form of
-iteration `exhaust`. It's called `scan` in K and Q. 
+Here we keep going up the tree until we can't go any further (ends at 0). When node zero's
+parent is zero, we know we've reached the root node - that the "checking last value" trick
+works. We call this form of iteration `exhaust`. It's called `scan` in K and Q. 
 
 We reverse the result so that it is in `parentA.parentB.parentC.child` order.
 

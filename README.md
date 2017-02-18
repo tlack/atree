@@ -70,8 +70,8 @@ nodecnt(t) = { len(t.p) }
 * Keys of all nodes
 
 ```
-join(x,y) = { flatten(x,y) }    # helper func.. push_back, [], etc.
-range(x,y) = { # Q `count`; APL/C++ `iota`; return [x, x+1, x+2, ...y-1]
+join(x,y) = { flatten(x,y) }    # append to vec. i.e., x.push_back(y), x[]=y, etc.
+range(x,y) = { # Q til, APL/C++ iota; return [x, x+1, x+2, ...y-1]
 	i=x; ret=[]; while(i++<y) ret=join(ret,i); return ret
 }
 keys(t) = { range(0, nodecnt(t)) }
@@ -105,7 +105,7 @@ data(t,c) = { t.d[c] }
 * Scan for keys that have a given value:
 
 ```
-where(vec,val) = { # helper: return indices of vec that contain val
+where(vec,val) = { # return indices of vec that contain val
 	matches=[]
 	for idx,v in vec: if(v==val, {matches=join(matches,idx)})
 	return matches

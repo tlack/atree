@@ -141,7 +141,7 @@ leaves(t) = { except(keys(t), t.p) }
 Here we keep going up the tree until we can't go any further (ends at 0). We call this form of
 iteration `exhaust`. It's called `scan` in K and Q. 
 
-We reverse the result so that its in `parentA.parentB.parentC.child` order.
+We reverse the result so that it is in `parentA.parentB.parentC.child` order.
 
 ```
 exhaust(vec,start) = {

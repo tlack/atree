@@ -251,6 +251,14 @@ implementation in
 J](https://rosettacode.org/wiki/Tree_traversal#J:_Alternate_implementation)
 (with some illuminating comments).
 
+John Earnest goes into [much more detail about vector tree implementations]
+(https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Trees.md), including the
+"index of offsets" approach to deleting entries. Worth a read.
+
+A more elaborate approach is to also track the depth of each item. [Details about
+that approach](http://dl.acm.org/citation.cfm?id=2935331) can be found in Aaron
+W. Hsu's paper on the subject.
+
 ## Other common tree implementations
 
 Here are some other well known trees. 
@@ -274,4 +282,10 @@ for use or fully fleshed out. I still have a lot to learn about C++.
 
 ## Thanks
 
-Arthur Whitney, Apter, others: inspiration. Dave Linn: proof reading.
+Arthur Whitney, Apter, others: inspiration. 
+
+John Earnest: source materials
+
+Dave Linn: proof reading.
+
+

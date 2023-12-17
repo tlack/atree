@@ -50,10 +50,10 @@ Computers are very, very fast at manipulating vectors. They're so much faster
 than pointer operations that comparisons of big-O notation for an algorithm
 don't play out in practice. 
 
-## Operations in psuedocode
+## Operations in pseudocode
 
 The technique is applicable in all languages.  This library is written in C++
-but I will use psuedocode to explain how it works.
+but I will use pseudocode to explain how it works.
 
 * Empty tree
 
@@ -129,7 +129,7 @@ childdata(t,c) = { data(childnodes(c)) }
 * Determine leaf nodes (those with no children):
 
 First, build a vector of all the indices. Then remove those indices that are
-also in `p`. The psuedocode below is a slow implementation; should be done as a 
+also in `p`. The pseudocode below is a slow implementation; should be done as a 
 single loop.
 
 ```
